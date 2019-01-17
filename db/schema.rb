@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_192502) do
+ActiveRecord::Schema.define(version: 2019_01_17_205512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_192502) do
     t.bigint "encounter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
     t.index ["creature_id"], name: "index_creature_encounters_on_creature_id"
     t.index ["encounter_id"], name: "index_creature_encounters_on_encounter_id"
   end
@@ -62,11 +63,11 @@ ActiveRecord::Schema.define(version: 2019_01_17_192502) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
-    t.string "class"
+    t.string "player_class"
     t.integer "level"
     t.integer "hp"
     t.integer "ac"
-    t.integer "speed"
+    t.string "speed"
     t.integer "str"
     t.integer "dex"
     t.integer "con"
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_192502) do
     t.integer "cha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "race"
   end
 
   add_foreign_key "creature_encounters", "creatures"
