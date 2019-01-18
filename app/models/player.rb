@@ -1,4 +1,3 @@
 class Player < ApplicationRecord
-  has_many :player_encounters
-  has_many :encounters, through: :player_encounters
+  has_and_belongs_to_many :encounters
 end

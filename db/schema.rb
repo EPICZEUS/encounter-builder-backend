@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_205512) do
+ActiveRecord::Schema.define(version: 2019_01_18_185101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,12 +44,26 @@ ActiveRecord::Schema.define(version: 2019_01_17_205512) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "creatures_encounters", force: :cascade do |t|
+    t.bigint "creature_id"
+    t.bigint "encounter_id"
+    t.index ["creature_id"], name: "index_creatures_encounters_on_creature_id"
+    t.index ["encounter_id"], name: "index_creatures_encounters_on_encounter_id"
+  end
+
   create_table "encounters", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "xp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "encounters_players", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "encounter_id"
+    t.index ["encounter_id"], name: "index_encounters_players_on_encounter_id"
+    t.index ["player_id"], name: "index_encounters_players_on_player_id"
   end
 
   create_table "player_encounters", force: :cascade do |t|
@@ -81,6 +95,10 @@ ActiveRecord::Schema.define(version: 2019_01_17_205512) do
 
   add_foreign_key "creature_encounters", "creatures"
   add_foreign_key "creature_encounters", "encounters"
+  add_foreign_key "creatures_encounters", "creatures"
+  add_foreign_key "creatures_encounters", "encounters"
+  add_foreign_key "encounters_players", "encounters"
+  add_foreign_key "encounters_players", "players"
   add_foreign_key "player_encounters", "encounters"
   add_foreign_key "player_encounters", "players"
 end
