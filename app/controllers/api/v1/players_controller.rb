@@ -30,6 +30,6 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   def player_params
-    params.permit(:name, :race, :class, :level, :hp, :ac, :speed, :str, :dex, :con, :int, :wis, :cha)
+    params.permit(:name, :race, :player_class, :level, :hp, :ac, :speed, :str, :dex, :con, :int, :wis, :cha)
   end
 end
