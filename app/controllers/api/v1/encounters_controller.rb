@@ -11,22 +11,22 @@ class Api::V1::EncountersController < ApplicationController
   end
 
   def new
-    @player = Player.new
+    @encounter = Encounter.new
   end
 
   def create
-    @player = Player.create(player_params)
-    if @player.valid?
-      render json: @note, status: :accepted
+    @encounter = Encounter.create(encounter_params)
+    if @encounter.valid?
+      render json: @encounter, status: :accepted
     else
-      render json: { errors: @player.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: @encounter.errors.full_messages }, status: :unprocessible_entity
     end
   end
 
   private
 
   def encounter_params
-    
+    params.permit(:name, :description, players: [], creatures: [])
   end
 
   def find_encounter
