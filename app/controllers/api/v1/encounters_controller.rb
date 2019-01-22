@@ -26,7 +26,7 @@ class Api::V1::EncountersController < ApplicationController
   private
 
   def encounter_params
-    params.permit(:name, :description, players: [], creatures: [])
+    params.permit(:name, :description, player_ids: [], creature_ids: [])
   end
 
   def find_encounter
