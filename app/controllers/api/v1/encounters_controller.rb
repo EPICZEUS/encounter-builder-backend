@@ -1,5 +1,5 @@
 class Api::V1::EncountersController < ApplicationController
-  before_action :find_encounter, only: [:show]
+  before_action :find_encounter, only: [:show, :edit, :update, :destroy]
 
   def index
     @encounters = Encounter.all
@@ -22,6 +22,23 @@ class Api::V1::EncountersController < ApplicationController
       render json: { errors: @encounter.errors.full_messages }, status: :unprocessible_entity
     end
   end
+
+	def edit
+	  #code
+	end
+
+	def update
+	  if @encounter.update(encounter_params)
+			render json: @encounter, status: :accepted
+		else
+			render json: { errors: @encounter.errors.full_messages }, status: :unprocessible_entity
+		end
+	end
+
+	def destroy
+	  @encounter.destroy
+		render json: @encounters
+	end
 
   private
 
